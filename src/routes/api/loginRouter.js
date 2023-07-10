@@ -38,7 +38,7 @@ LoginRouter.post('/send-email', async function sendMail() {
     // Set up email data
     let mailOptions = {
       from: 'arun.maitexa@outlook.com', // Sender address
-      to: 'maitexa@gmail.com', // Recipient address
+      to: 'maneesh.maitexa@gmail.com', // Recipient address
       subject: 'Test Mail', // Subject line
       text: 'Good morning!' // Plain text body
     };
