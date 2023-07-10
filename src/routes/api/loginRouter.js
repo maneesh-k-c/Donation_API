@@ -8,62 +8,35 @@ const LoginRouter = express.Router()
 
 
 
-
-// const transporter = nodemailer.createTransport({
-//     host: "smtp.gmail.com",
-//     port: 465,
-//     // service:'gmail',
-//     auth: {
-//       user: "emailtester167@gmail.com",
-//       password: "tester@123.",
-//     },
-//     secure: false,
-//   });
-const transporter2 = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-      port: 465,
-  debug: true,
-  secure: true, 
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
   auth: {
-    user: "emailtester167@gmail.com",
-          password: "tester@123.",
-  },
+    user: 'emailtester167@gmail.com',
+    pass: 'tester@123.'
+  }
 });
-  
-  // Define a function to send an email
-  const sendEmail = async (to, subject, text) => {
-    // const mailOptions = {
-    //   from: "maneesh.maitexa@gmail.com",
-    //   to,
-    //   subject,
-    //   text,
-    // };
 
-    const mailOptions = {
-        from: "sender@example.com",
-        to: "recipient@example.com",
-        subject: "Hello from Node.js",
-        text: "This is a plain text email.",
-      };
-  
-    try {
-      const message = await transporter2.sendMail(mailOptions);
-      console.log("Email sent successfully!");
-    } catch (error) {
-      console.log(error);
-    }
+LoginRouter.post('/send-email', (req, res) => {
+  // const { recipient, subject, text } = req.body;
+
+  const mailOptions = {
+    from: 'emailtester167@gmail.com',
+    to: 'maneeshchandran28@gmail.com',
+    subject: 'subject',
+    text: 'text'
   };
-  
-  // Create a route to send an email
-  LoginRouter.post("/send-email", async (req, res) => {
-    const to = req.body.to;
-    const subject = req.body.subject;
-    const text = req.body.text;
-  
-    await sendEmail(to, subject, text);
-  
-    res.status(200).json({ message: "Email sent successfully!" });
+
+  // Send the email
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send('Error sending email');
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.send('Email sent successfully');
+    }
   });
+});
 
 
 
@@ -85,45 +58,19 @@ const transporter2 = nodemailer.createTransport({
 
 
 
-// const config = {
-    
-//     'service':"gmail",
-//     'host':"smtp.gmail.com",
-//     'port':587,
-//     'secure':false,
-//     'auth':{
-//         'user':"amithkkt@gmail.com",
-//         'pass':"amith@12345"
-//     }
-// }
-
-// const send =(data)=>{
-//     const transporter=nodemailer.createTransport(config)
-//     transporter.sendMail(data,(err,info)=>{
-//         if(err){
-//             console.log(err);
-//         }else{
-//             return info.response
-//         }
-//     })
-// }
 
 
-// const data = {
-//     'from':"nodemailer@gmail.com",
-//     'to':"maneesh.maitexa@gmail.com",
-//     'subject':"Thank you",
-//     'text':"hello"
-// }
 
-// LoginRouter.post('/mail',async(req,res)=>{
-//     const {from,to,subject,text}= req.body
-//     const data ={from,to,subject,text}
-//     const r = await nodemailer.sendMail(data )
-//     res.json({
-//         data:r
-//     })
-// })
+
+
+
+
+
+
+
+
+
+
 
 LoginRouter.post("/", async (req, res) => {
     const { username, password } = req.body;
