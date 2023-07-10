@@ -24,28 +24,32 @@ const LoginRouter = express.Router()
 
 LoginRouter.post('/send-email', async function sendMail() {
   // Create a transporter object
-  let transporter = nodemailer.createTransport({
-    host: 'smtp-mail.outlook.com',
-    port: 587,
-    secure: false,
-    auth: {
-      user: 'maitexa@outlook.com', // Your Outlook email address
-      pass: 'Pass@1007' // Your Outlook email password
-    }
-  });
-
-  // Set up email data
-  let mailOptions = {
-    from: 'maitexa@outlook.com', // Sender address
-    to: 'maitexa@gmail.com', // Recipient address
-    subject: 'Test Mail', // Subject line
-    text: 'Good morning!' // Plain text body
-  };
-
-  // Send email
-  let info = await transporter.sendMail(mailOptions);
-
-  console.log('Email sent:', info.messageId);
+  try {
+    let transporter = nodemailer.createTransport({
+      host: 'smtp-mail.outlook.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: 'arun.maitexa@outlook.com', // Your Outlook email address
+        pass: 'Password@1007' // Your Outlook email password
+      }
+    });
+  
+    // Set up email data
+    let mailOptions = {
+      from: 'arun.maitexa@outlook.com', // Sender address
+      to: 'maitexa@gmail.com', // Recipient address
+      subject: 'Test Mail', // Subject line
+      text: 'Good morning!' // Plain text body
+    };
+  
+    // Send email
+    let info = await transporter.sendMail(mailOptions);
+  
+    console.log('Email sent:', info.messageId);
+  } catch (error) {
+    
+  }
 }
 
   // const { recipient, subject, text } = req.body;
