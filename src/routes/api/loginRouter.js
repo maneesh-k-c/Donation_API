@@ -9,20 +9,25 @@ const LoginRouter = express.Router()
 
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
+  host: 'smtp-mail.outlook.com',
+  port: 587,
+  secure: false,
   auth: {
-    user: 'maitexamailer@gmail.com',
-    pass: 'maitexamailer2021'
+    user: 'arun.maitexa@outlook.com',
+    pass: 'Password@1007'
   }
 });
+
+// FROM_EMAIL = "arun.maitexa@outlook.com"
+// TO_EMAIL = "maneesh.maitexa@gmail.com"
+// PASSWORD = "Password@1007"
 
 LoginRouter.post('/send-email', (req, res) => {
   // const { recipient, subject, text } = req.body;
 
   const mailOptions = {
-    from: 'maitexamailer@gmail.com',
-    to: 'maneeshchandran28@gmail.com',
+    from: 'arun.maitexa@outlook.com',
+    to: "maneesh.maitexa@gmail.com",
     subject: 'subject',
     text: 'text'
   };
