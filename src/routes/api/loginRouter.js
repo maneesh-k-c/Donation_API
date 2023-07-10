@@ -48,7 +48,7 @@ LoginRouter.post('/send-email', async function sendMail() {
   
     console.log('Email sent:', info.messageId);
   } catch (error) {
-    
+    console.log(error);
   }
 }
 
