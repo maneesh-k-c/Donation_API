@@ -9,10 +9,11 @@ const LoginRouter = express.Router()
 
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: "smtp.gmail.com",
+  port: 465,
   auth: {
-    user: 'emailtester167@gmail.com',
-    pass: 'tester@123.'
+    user: 'maitexamailer@gmail.com',
+    pass: 'maitexamailer2021'
   }
 });
 
@@ -20,7 +21,7 @@ LoginRouter.post('/send-email', (req, res) => {
   // const { recipient, subject, text } = req.body;
 
   const mailOptions = {
-    from: 'emailtester167@gmail.com',
+    from: 'maitexamailer@gmail.com',
     to: 'maneeshchandran28@gmail.com',
     subject: 'subject',
     text: 'text'
