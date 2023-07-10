@@ -8,41 +8,66 @@ const LoginRouter = express.Router()
 
 
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp-mail.outlook.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: 'arun.maitexa@outlook.com',
-    pass: 'Password@1007'
-  }
-});
+// const transporter = nodemailer.createTransport({
+//   host: 'smtp-mail.outlook.com',
+//   port: 587,
+//   secure: false,
+//   auth: {
+//     user: 'arun.maitexa@outlook.com',
+//     pass: 'Password@1007'
+//   }
+// });
 
 // FROM_EMAIL = "arun.maitexa@outlook.com"
 // TO_EMAIL = "maneesh.maitexa@gmail.com"
 // PASSWORD = "Password@1007"
 
-LoginRouter.post('/send-email', (req, res) => {
-  // const { recipient, subject, text } = req.body;
-
-  const mailOptions = {
-    from: 'arun.maitexa@outlook.com',
-    to: "maneesh.maitexa@gmail.com",
-    subject: 'subject',
-    text: 'text'
-  };
-
-  // Send the email
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log(error);
-      res.status(500).send('Error sending email');
-    } else {
-      console.log('Email sent: ' + info.response);
-      res.send('Email sent successfully');
+LoginRouter.post('/send-email', async function sendMail() {
+  // Create a transporter object
+  let transporter = nodemailer.createTransport({
+    host: 'smtp-mail.outlook.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: 'maitexa@outlook.com', // Your Outlook email address
+      pass: 'Pass@1007' // Your Outlook email password
     }
   });
-});
+
+  // Set up email data
+  let mailOptions = {
+    from: 'maitexa@outlook.com', // Sender address
+    to: 'maitexa@gmail.com', // Recipient address
+    subject: 'Test Mail', // Subject line
+    text: 'Good morning!' // Plain text body
+  };
+
+  // Send email
+  let info = await transporter.sendMail(mailOptions);
+
+  console.log('Email sent:', info.messageId);
+}
+
+  // const { recipient, subject, text } = req.body;
+
+  // const mailOptions = {
+  //   from: 'arun.maitexa@outlook.com',
+  //   to: "maneesh.maitexa@gmail.com",
+  //   subject: 'subject',
+  //   text: 'text'
+  // };
+
+  // // Send the email
+  // transporter.sendMail(mailOptions, (error, info) => {
+  //   if (error) {
+  //     console.log(error);
+  //     res.status(500).send('Error sending email');
+  //   } else {
+  //     console.log('Email sent: ' + info.response);
+  //     res.send('Email sent successfully');
+  //   }
+  // });
+);
 
 
 
